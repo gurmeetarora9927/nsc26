@@ -1,0 +1,56 @@
+graph TD
+    Start[AtmaGuard System Start] --> CheckEmergency{Emergency<br/>Detected?}
+    
+    CheckEmergency -->|Fire/Smoke| FireProtocol[🔥 FIRE PROTOCOL<br/>Vents: OPEN MAX<br/>Exhaust: ON MAX<br/>Air Purifier: OFF<br/>Alert: EVACUATE]
+    
+    CheckEmergency -->|CO > 50ppm| COProtocol{Outdoor<br/>Pollution?}
+    COProtocol -->|High| COHigh[⚠️ CO + POLLUTION<br/>Vents: CLOSED<br/>Exhaust: ON HIGH<br/>Purifier: ON HIGH<br/>Alert: CRITICAL]
+    COProtocol -->|Low| COLow[⚠️ CO EMERGENCY<br/>Vents: Status<br/>Exhaust: ON HIGH<br/>Alert: CO DETECTED]
+    
+    CheckEmergency -->|Ammonia/VOC| ToxicGas[⚠️ TOXIC GAS<br/>Vents: OPEN<br/>Exhaust: ON HIGH<br/>Alert: TOXIC GAS]
+    
+    CheckEmergency -->|Equipment Failure| Manual[⚠️ SYSTEM FAULT<br/>All: MANUAL<br/>Alert: MALFUNCTION]
+    
+    CheckEmergency -->|None| CheckCO2{CO2 Level?}
+    
+    CheckCO2 -->|Very High >2000ppm| CO2Critical{Outdoor<br/>AQI?}
+    CO2Critical -->|Low| CO2CritLow[CO2 CRITICAL<br/>Vents: OPEN MAX<br/>Exhaust: ON HIGH<br/>O2 Gen: ON MED<br/>Alert: CO2 CRITICAL]
+    CO2Critical -->|High| CO2CritHigh[CO2 CRITICAL SEALED<br/>Vents: CLOSED<br/>Exhaust: ON HIGH<br/>Purifier: ON<br/>Alert: CO2 CRITICAL]
+    
+    CheckCO2 -->|High 1000-2000ppm| CO2High{Outdoor<br/>Pollution?}
+    CO2High -->|Low| CO2HighLow[CO2 ELEVATED<br/>Vents: OPEN<br/>Exhaust: ON MED<br/>Alert: VENTILATING]
+    CO2High -->|High| CO2HighHigh[CO2 SEALED<br/>Vents: CLOSED<br/>Exhaust: ON HIGH<br/>Alert: CO2 SEALED]
+    
+    CheckCO2 -->|Normal <1000ppm| CheckPollution{Compare<br/>Indoor vs Outdoor<br/>AQI}
+    
+    CheckPollution -->|Outdoor < Indoor| CheckTime1{Time of Day?}
+    CheckTime1 -->|Day| CheckOutdoorQuality{Outdoor<br/>AQI Level?}
+    CheckOutdoorQuality -->|Low <50| SafeOutside[✓ SAFE TO GO OUT<br/>Vents: OPEN<br/>Exhaust: OFF<br/>Purifier: OFF<br/>Alert: SAFE OUTSIDE]
+    CheckOutdoorQuality -->|Moderate| ModerateOut[MODERATE OUTDOOR<br/>Vents: OPEN PARTIAL<br/>Exhaust: OFF<br/>Purifier: OFF<br/>Alert: MODERATE]
+    
+    CheckTime1 -->|Night| EnergySave[ENERGY SAVE<br/>Vents: CLOSED<br/>Exhaust: OFF<br/>Purifier: OFF<br/>Alert: SLEEP MODE]
+    
+    CheckPollution -->|Outdoor > Indoor| CheckOutdoorSeverity{Outdoor<br/>Pollution<br/>Severity?}
+    
+    CheckOutdoorSeverity -->|Severe >300| SevereOut[🚨 HAZARDOUS<br/>Vents: CLOSED<br/>Exhaust: OFF<br/>Purifier: ON MAX<br/>O2 Gen: ON LOW<br/>Alert: HAZARDOUS]
+    
+    CheckOutdoorSeverity -->|High 150-300| HighOut{Indoor<br/>Pollution?}
+    HighOut -->|High| BothHigh[SEVERE POLLUTION<br/>Vents: CLOSED<br/>Exhaust: OFF<br/>Purifier: ON HIGH<br/>Alert: SEVERE]
+    HighOut -->|Low/Moderate| OutdoorHigh[OUTDOOR HIGH<br/>Vents: CLOSED<br/>Exhaust: OFF<br/>Purifier: ON LOW<br/>Alert: OUTDOOR HIGH]
+    
+    CheckOutdoorSeverity -->|Moderate 50-150| CheckTime2{Time?}
+    CheckTime2 -->|Day| ModerateDay[MODERATE FILTRATION<br/>Vents: CLOSED<br/>Purifier: ON MED<br/>Alert: MODERATE]
+    CheckTime2 -->|Night| ModerateNight[NIGHT FILTRATION<br/>Vents: CLOSED<br/>Purifier: ON LOW<br/>Alert: NIGHT MODE]
+    
+    CheckPollution -->|Both Low| Optimal[✓ OPTIMAL<br/>Vents: OPEN<br/>All Equipment: OFF<br/>Alert: EXCELLENT]
+    
+    style FireProtocol fill:#ff4444,stroke:#990000,stroke-width:4px,color:#fff
+    style COHigh fill:#ff8800,stroke:#cc6600,stroke-width:3px,color:#fff
+    style COLow fill:#ff8800,stroke:#cc6600,stroke-width:3px,color:#fff
+    style ToxicGas fill:#ff8800,stroke:#cc6600,stroke-width:3px,color:#fff
+    style CO2CritLow fill:#ffaa00,stroke:#dd8800,stroke-width:2px
+    style CO2CritHigh fill:#ffaa00,stroke:#dd8800,stroke-width:2px
+    style SevereOut fill:#ff6666,stroke:#cc3333,stroke-width:3px
+    style BothHigh fill:#ff6666,stroke:#cc3333,stroke-width:3px
+    style Optimal fill:#44ff44,stroke:#00cc00,stroke-width:3px
+    style SafeOutside fill:#88ff88,stroke:#44cc44,stroke-width:2px

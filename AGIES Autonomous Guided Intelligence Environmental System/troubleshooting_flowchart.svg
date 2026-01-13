@@ -1,0 +1,341 @@
+<svg viewBox="0 0 1400 2000" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="700" y="30" font-size="28" font-weight="bold" text-anchor="middle" fill="#000">AtmaGuard Troubleshooting Flowchart</text>
+  <text x="700" y="55" font-size="14" text-anchor="middle" fill="#666">Systematic Fault Diagnosis & Resolution</text>
+  
+  <defs>
+    <!-- Arrow marker -->
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+    
+    <!-- Decision diamond -->
+    <g id="decision-template">
+      <path d="M 0,-40 L 60,0 L 0,40 L -60,0 Z" fill="#ffffcc" stroke="#cc9900" stroke-width="2"/>
+    </g>
+    
+    <!-- Process rectangle -->
+    <g id="process-template">
+      <rect x="-70" y="-25" width="140" height="50" fill="#e6f3ff" stroke="#0066cc" stroke-width="2" rx="5"/>
+    </g>
+    
+    <!-- Problem rectangle -->
+    <g id="problem-template">
+      <rect x="-80" y="-30" width="160" height="60" fill="#ffe6e6" stroke="#cc0000" stroke-width="3" rx="5"/>
+    </g>
+    
+    <!-- Solution rectangle -->
+    <g id="solution-template">
+      <rect x="-80" y="-25" width="160" height="50" fill="#e6ffe6" stroke="#00aa00" stroke-width="2" rx="5"/>
+    </g>
+  </defs>
+  
+  <!-- START -->
+  <rect x="600" y="80" width="200" height="60" fill="#4CAF50" stroke="#2E7D32" stroke-width="3" rx="10"/>
+  <text x="700" y="110" font-size="18" font-weight="bold" text-anchor="middle" fill="#fff">START</text>
+  <text x="700" y="128" font-size="12" text-anchor="middle" fill="#fff">Power On System</text>
+  
+  <!-- Arrow down -->
+  <line x1="700" y1="140" x2="700" y2="180" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Decision: Power LED on ESP32? -->
+  <g transform="translate(700, 220)">
+    <use href="#decision-template"/>
+    <text x="0" y="-5" font-size="12" font-weight="bold" text-anchor="middle">ESP32 Power</text>
+    <text x="0" y="10" font-size="12" font-weight="bold" text-anchor="middle">LED ON?</text>
+  </g>
+  
+  <!-- NO arrow (left) -->
+  <line x1="640" y1="220" x2="550" y2="220" stroke="#cc0000" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="590" y="215" font-size="11" fill="#cc0000" font-weight="bold">NO</text>
+  
+  <!-- Problem: No Power -->
+  <rect x="370" y="190" width="160" height="60" fill="#ffe6e6" stroke="#cc0000" stroke-width="3" rx="5"/>
+  <text x="450" y="213" font-size="13" font-weight="bold" text-anchor="middle" fill="#cc0000">PROBLEM:</text>
+  <text x="450" y="230" font-size="12" text-anchor="middle">No Power to</text>
+  <text x="450" y="245" font-size="12" text-anchor="middle">ESP32</text>
+  
+  <!-- Arrow down from No Power -->
+  <line x1="450" y1="250" x2="450" y2="290" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Solution: Check Power Supply -->
+  <rect x="370" y="300" width="160" height="80" fill="#fff9e6" stroke="#ff9933" stroke-width="2" rx="5"/>
+  <text x="450" y="320" font-size="11" font-weight="bold" text-anchor="middle">SOLUTION:</text>
+  <text x="450" y="337" font-size="10" text-anchor="middle">1. Check 5V adapter</text>
+  <text x="450" y="352" font-size="10" text-anchor="middle">2. Measure rail: 4.8-5.2V</text>
+  <text x="450" y="367" font-size="10" text-anchor="middle">3. Check VIN connection</text>
+  
+  <!-- Arrow back up -->
+  <line x1="450" y1="380" x2="450" y2="410" stroke="#666" stroke-width="2"/>
+  <line x1="450" y1="410" x2="700" y2="410" stroke="#666" stroke-width="2"/>
+  <line x1="700" y1="410" x2="700" y2="180" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="560" y="425" font-size="10" fill="#666">Retry after fix</text>
+  
+  <!-- YES arrow (down) from Power LED -->
+  <line x1="700" y1="260" x2="700" y2="300" stroke="#00aa00" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="720" y="285" font-size="11" fill="#00aa00" font-weight="bold">YES</text>
+  
+  <!-- Decision: Fans spinning? -->
+  <g transform="translate(700, 340)">
+    <use href="#decision-template"/>
+    <text x="0" y="-5" font-size="12" font-weight="bold" text-anchor="middle">Any Fans</text>
+    <text x="0" y="10" font-size="12" font-weight="bold" text-anchor="middle">Spinning?</text>
+  </g>
+  
+  <!-- NO arrow (right) -->
+  <line x1="760" y1="340" x2="850" y2="340" stroke="#cc0000" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="800" y="335" font-size="11" fill="#cc0000" font-weight="bold">NO</text>
+  
+  <!-- Problem: No Fan Control -->
+  <rect x="870" y="310" width="160" height="60" fill="#ffe6e6" stroke="#cc0000" stroke-width="3" rx="5"/>
+  <text x="950" y="333" font-size="13" font-weight="bold" text-anchor="middle" fill="#cc0000">PROBLEM:</text>
+  <text x="950" y="350" font-size="12" text-anchor="middle">Fans Not</text>
+  <text x="950" y="365" font-size="12" text-anchor="middle">Receiving PWM</text>
+  
+  <!-- Arrow down -->
+  <line x1="950" y1="370" x2="950" y2="410" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Check: ULN2803A -->
+  <rect x="870" y="420" width="160" height="100" fill="#fff9e6" stroke="#ff9933" stroke-width="2" rx="5"/>
+  <text x="950" y="440" font-size="11" font-weight="bold" text-anchor="middle">CHECK ULN2803A:</text>
+  <text x="950" y="458" font-size="10" text-anchor="middle">1. Pin 10 (COM) = +5V?</text>
+  <text x="950" y="473" font-size="10" text-anchor="middle">2. Pin 9 (GND) = GND?</text>
+  <text x="950" y="488" font-size="10" text-anchor="middle">3. GPIO25-27,14 = PWM?</text>
+  <text x="950" y="503" font-size="10" text-anchor="middle">4. Measure OUT1-4 voltage</text>
+  
+  <!-- Decision: ULN outputs correct? -->
+  <g transform="translate(950, 560)">
+    <use href="#decision-template"/>
+    <text x="0" y="-5" font-size="11" font-weight="bold" text-anchor="middle">ULN Outputs</text>
+    <text x="0" y="8" font-size="11" font-weight="bold" text-anchor="middle">0-5V PWM?</text>
+  </g>
+  
+  <!-- NO -->
+  <line x1="890" y1="560" x2="800" y2="560" stroke="#cc0000" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="840" y="555" font-size="10" fill="#cc0000" font-weight="bold">NO</text>
+  
+  <rect x="640" y="540" width="140" height="70" fill="#ffcccc" stroke="#cc0000" stroke-width="2" rx="5"/>
+  <text x="710" y="560" font-size="10" font-weight="bold" text-anchor="middle">FAULT:</text>
+  <text x="710" y="577" font-size="9" text-anchor="middle">ULN2803A IC bad</text>
+  <text x="710" y="592" font-size="9" text-anchor="middle">or incorrectly</text>
+  <text x="710" y="605" font-size="9" text-anchor="middle">inserted (check notch)</text>
+  
+  <!-- YES -->
+  <line x1="950" y1="600" x2="950" y2="640" stroke="#00aa00" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="970" y="625" font-size="10" fill="#00aa00" font-weight="bold">YES</text>
+  
+  <!-- Check Fan Wiring -->
+  <rect x="870" y="650" width="160" height="80" fill="#e6f3ff" stroke="#0066cc" stroke-width="2" rx="5"/>
+  <text x="950" y="670" font-size="11" font-weight="bold" text-anchor="middle">CHECK FAN WIRING:</text>
+  <text x="950" y="688" font-size="9" text-anchor="middle">1. Fan (+) = ULN OUT?</text>
+  <text x="950" y="703" font-size="9" text-anchor="middle">2. Fan (-) = GND?</text>
+  <text x="950" y="718" font-size="9" text-anchor="middle">3. Test fan direct 5V</text>
+  
+  <!-- YES arrow (down) from Fans Spinning -->
+  <line x1="700" y1="380" x2="700" y2="420" stroke="#00aa00" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="720" y="405" font-size="11" fill="#00aa00" font-weight="bold">YES</text>
+  
+  <!-- Decision: RGB LEDs working? -->
+  <g transform="translate(700, 460)">
+    <use href="#decision-template"/>
+    <text x="0" y="-5" font-size="12" font-weight="bold" text-anchor="middle">RGB LEDs</text>
+    <text x="0" y="10" font-size="12" font-weight="bold" text-anchor="middle">Lighting?</text>
+  </g>
+  
+  <!-- NO arrow (left) -->
+  <line x1="640" y1="460" x2="550" y2="460" stroke="#cc0000" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="590" y="455" font-size="11" fill="#cc0000" font-weight="bold">NO</text>
+  
+  <!-- Problem: LED Issue -->
+  <rect x="370" y="430" width="160" height="60" fill="#ffe6e6" stroke="#cc0000" stroke-width="3" rx="5"/>
+  <text x="450" y="453" font-size="13" font-weight="bold" text-anchor="middle" fill="#cc0000">PROBLEM:</text>
+  <text x="450" y="470" font-size="12" text-anchor="middle">RGB LEDs Not</text>
+  <text x="450" y="485" font-size="12" text-anchor="middle">Functioning</text>
+  
+  <!-- Arrow down -->
+  <line x1="450" y1="490" x2="450" y2="530" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Check I2C -->
+  <rect x="370" y="540" width="160" height="100" fill="#fff9e6" stroke="#ff9933" stroke-width="2" rx="5"/>
+  <text x="450" y="560" font-size="11" font-weight="bold" text-anchor="middle">CHECK PCA9685:</text>
+  <text x="450" y="578" font-size="9" text-anchor="middle">1. I²C scan (0x40 responds?)</text>
+  <text x="450" y="593" font-size="9" text-anchor="middle">2. SDA/SCL connections</text>
+  <text x="450" y="608" font-size="9" text-anchor="middle">3. PCA VCC = 5V?</text>
+  <text x="450" y="623" font-size="9" text-anchor="middle">4. All 220Ω resistors OK?</text>
+  
+  <!-- Decision: I2C working? -->
+  <g transform="translate(450, 680)">
+    <use href="#decision-template"/>
+    <text x="0" y="-5" font-size="11" font-weight="bold" text-anchor="middle">PCA9685</text>
+    <text x="0" y="8" font-size="11" font-weight="bold" text-anchor="middle">Responds?</text>
+  </g>
+  
+  <!-- NO -->
+  <line x1="390" y1="680" x2="300" y2="680" stroke="#cc0000" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="340" y="675" font-size="10" fill="#cc0000" font-weight="bold">NO</text>
+  
+  <rect x="140" y="660" width="140" height="70" fill="#ffcccc" stroke="#cc0000" stroke-width="2" rx="5"/>
+  <text x="210" y="680" font-size="10" font-weight="bold" text-anchor="middle">FAULT:</text>
+  <text x="210" y="697" font-size="9" text-anchor="middle">• Wrong I²C pins</text>
+  <text x="210" y="712" font-size="9" text-anchor="middle">• PCA9685 damaged</text>
+  <text x="210" y="725" font-size="9" text-anchor="middle">• Missing pull-ups</text>
+  
+  <!-- YES -->
+  <line x1="450" y1="720" x2="450" y2="760" stroke="#00aa00" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="470" y="745" font-size="10" fill="#00aa00" font-weight="bold">YES</text>
+  
+  <!-- Check LED Wiring -->
+  <rect x="370" y="770" width="160" height="100" fill="#e6f3ff" stroke="#0066cc" stroke-width="2" rx="5"/>
+  <text x="450" y="790" font-size="11" font-weight="bold" text-anchor="middle">CHECK LED WIRING:</text>
+  <text x="450" y="808" font-size="9" text-anchor="middle">1. LED polarity correct?</text>
+  <text x="450" y="823" font-size="9" text-anchor="middle">2. Cathode to GND?</text>
+  <text x="450" y="838" font-size="9" text-anchor="middle">3. R/G/B not swapped?</text>
+  <text x="450" y="853" font-size="9" text-anchor="middle">4. Test LED with 3V battery</text>
+  
+  <!-- YES arrow (down) from RGB LEDs -->
+  <line x1="700" y1="500" x2="700" y2="540" stroke="#00aa00" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="720" y="525" font-size="11" fill="#00aa00" font-weight="bold">YES</text>
+  
+  <!-- Decision: Sensors reading? -->
+  <g transform="translate(700, 580)">
+    <use href="#decision-template"/>
+    <text x="0" y="-5" font-size="12" font-weight="bold" text-anchor="middle">Sensors</text>
+    <text x="0" y="10" font-size="12" font-weight="bold" text-anchor="middle">Reading Data?</text>
+  </g>
+  
+  <!-- NO arrow (right) -->
+  <line x1="760" y1="580" x2="850" y2="580" stroke="#cc0000" stroke-width="2"/>
+  <line x1="850" y1="580" x2="850" y2="800" stroke="#cc0000" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="800" y="575" font-size="11" fill="#cc0000" font-weight="bold">NO</text>
+  
+  <!-- Sensor Troubleshooting -->
+  <rect x="870" y="810" width="180" height="120" fill="#fff9e6" stroke="#ff9933" stroke-width="2" rx="5"/>
+  <text x="960" y="830" font-size="11" font-weight="bold" text-anchor="middle">SENSOR CHECK:</text>
+  <text x="960" y="850" font-size="9" text-anchor="middle">PM2.5:</text>
+  <text x="960" y="865" font-size="9" text-anchor="middle">• 3.3V power (NOT 5V!)</text>
+  <text x="960" y="880" font-size="9" text-anchor="middle">• 280µs LED pulse correct?</text>
+  <text x="960" y="895" font-size="9" text-anchor="middle">MQ-135:</text>
+  <text x="960" y="910" font-size="9" text-anchor="middle">• 5V power, warmed 24hrs?</text>
+  <text x="960" y="925" font-size="9" text-anchor="middle">• ADC pin reading 0-1V?</text>
+  
+  <!-- YES arrow (down) from Sensors -->
+  <line x1="700" y1="620" x2="700" y2="660" stroke="#00aa00" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="720" y="645" font-size="11" fill="#00aa00" font-weight="bold">YES</text>
+  
+  <!-- Decision: Servo moving? -->
+  <g transform="translate(700, 700)">
+    <use href="#decision-template"/>
+    <text x="0" y="-5" font-size="12" font-weight="bold" text-anchor="middle">Servo</text>
+    <text x="0" y="10" font-size="12" font-weight="bold" text-anchor="middle">Responding?</text>
+  </g>
+  
+  <!-- NO arrow (left) -->
+  <line x1="640" y1="700" x2="550" y2="700" stroke="#cc0000" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="590" y="695" font-size="11" fill="#cc0000" font-weight="bold">NO</text>
+  
+  <!-- Servo Troubleshooting -->
+  <rect x="370" y="670" width="160" height="100" fill="#fff9e6" stroke="#ff9933" stroke-width="2" rx="5"/>
+  <text x="450" y="690" font-size="11" font-weight="bold" text-anchor="middle">SERVO CHECK:</text>
+  <text x="450" y="708" font-size="9" text-anchor="middle">1. 100µF cap installed?</text>
+  <text x="450" y="723" font-size="9" text-anchor="middle">2. Signal = GPIO13?</text>
+  <text x="450" y="738" font-size="9" text-anchor="middle">3. 50Hz PWM (20ms)?</text>
+  <text x="450" y="753" font-size="9" text-anchor="middle">4. Servo not stalled?</text>
+  
+  <!-- YES arrow (down) -->
+  <line x1="700" y1="740" x2="700" y2="780" stroke="#00aa00" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="720" y="765" font-size="11" fill="#00aa00" font-weight="bold">YES</text>
+  
+  <!-- SUCCESS -->
+  <rect x="600" y="790" width="200" height="70" fill="#4CAF50" stroke="#2E7D32" stroke-width="3" rx="10"/>
+  <text x="700" y="815" font-size="16" font-weight="bold" text-anchor="middle" fill="#fff">✓ SYSTEM OK</text>
+  <text x="700" y="835" font-size="12" text-anchor="middle" fill="#fff">All Components</text>
+  <text x="700" y="852" font-size="12" text-anchor="middle" fill="#fff">Working Correctly</text>
+  
+  <!-- Common Issues Section -->
+  <rect x="50" y="950" width="650" height="320" fill="#f9f9f9" stroke="#666" stroke-width="2" rx="5"/>
+  <text x="375" y="980" font-size="18" font-weight="bold" text-anchor="middle">COMMON ISSUES & QUICK FIXES</text>
+  
+  <!-- Issue 1 -->
+  <rect x="70" y="1000" width="290" height="70" fill="#ffe6e6" stroke="#cc0000" stroke-width="1" rx="3"/>
+  <text x="80" y="1020" font-size="11" font-weight="bold">1. System Resets Randomly</text>
+  <text x="80" y="1038" font-size="9">Cause: Insufficient power</text>
+  <text x="80" y="1053" font-size="9">Fix: Use 5V 5A supply, add 1000µF cap</text>
+  <text x="80" y="1065" font-size="9">Check: All fans + servo drawing >2A</text>
+  
+  <!-- Issue 2 -->
+  <rect x="380" y="1000" width="290" height="70" fill="#ffe6e6" stroke="#cc0000" stroke-width="1" rx="3"/>
+  <text x="390" y="1020" font-size="11" font-weight="bold">2. Wrong RGB Colors</text>
+  <text x="390" y="1038" font-size="9">Cause: R/G/B wires swapped</text>
+  <text x="390" y="1053" font-size="9">Fix: Verify PCA Ch order matches LED pins</text>
+  <text x="390" y="1065" font-size="9">Test: Set R=255,G=0,B=0 → should be red</text>
+  
+  <!-- Issue 3 -->
+  <rect x="70" y="1085" width="290" height="70" fill="#ffe6e6" stroke="#cc0000" stroke-width="1" rx="3"/>
+  <text x="80" y="1105" font-size="11" font-weight="bold">3. PM2.5 Always Reads 0</text>
+  <text x="80" y="1123" font-size="9">Cause: Wrong voltage (5V instead of 3.3V)</text>
+  <text x="80" y="1138" font-size="9">Fix: Connect to ESP32 3.3V pin</text>
+  <text x="80" y="1150" font-size="9">Check: LED pulse working (280µs)</text>
+  
+  <!-- Issue 4 -->
+  <rect x="380" y="1085" width="290" height="70" fill="#ffe6e6" stroke="#cc0000" stroke-width="1" rx="3"/>
+  <text x="390" y="1105" font-size="11" font-weight="bold">4. Servo Jitters/Shakes</text>
+  <text x="390" y="1123" font-size="9">Cause: Power supply noise</text>
+  <text x="390" y="1138" font-size="9">Fix: Add 100µF capacitor near servo</text>
+  <text x="390" y="1150" font-size="9">Check: Separate servo power if needed</text>
+  
+  <!-- Issue 5 -->
+  <rect x="70" y="1170" width="290" height="70" fill="#ffe6e6" stroke="#cc0000" stroke-width="1" rx="3"/>
+  <text x="80" y="1190" font-size="11" font-weight="bold">5. I²C Not Working</text>
+  <text x="80" y="1208" font-size="9">Cause: Wrong pins or bad connection</text>
+  <text x="80" y="1223" font-size="9">Fix: GPIO21=SDA, GPIO22=SCL</text>
+  <text x="80" y="1235" font-size="9">Test: Run I²C scanner, find 0x40</text>
+  
+  <!-- Issue 6 -->
+  <rect x="380" y="1170" width="290" height="70" fill="#ffe6e6" stroke="#cc0000" stroke-width="1" rx="3"/>
+  <text x="390" y="1190" font-size="11" font-weight="bold">6. MQ-135 Unstable Readings</text>
+  <text x="390" y="1208" font-size="9">Cause: Not warmed up (needs 24-48hrs)</text>
+  <text x="390" y="1223" font-size="9">Fix: Keep powered continuously</text>
+  <text x="390" y="1235" font-size="9">Normal: Sensor gets hot during operation</text>
+  
+  <!-- Tools Needed Section -->
+  <rect x="750" y="950" width="600" height="320" fill="#e6f3ff" stroke="#0066cc" stroke-width="2" rx="5"/>
+  <text x="1050" y="980" font-size="18" font-weight="bold" text-anchor="middle">TROUBLESHOOTING TOOLS</text>
+  
+  <!-- Tool 1 -->
+  <rect x="770" y="1000" width="250" height="60" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="780" y="1020" font-size="11" font-weight="bold">Digital Multimeter</text>
+  <text x="780" y="1037" font-size="9">• Voltage check (5V rails)</text>
+  <text x="780" y="1052" font-size="9">• Continuity test (wiring)</text>
+  
+  <!-- Tool 2 -->
+  <rect x="1050" y="1000" width="250" height="60" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="1060" y="1020" font-size="11" font-weight="bold">I²C Scanner Code</text>
+  <text x="1060" y="1037" font-size="9">• Find PCA9685 address (0x40)</text>
+  <text x="1060" y="1052" font-size="9">• Verify SDA/SCL connection</text>
+  
+  <!-- Tool 3 -->
+  <rect x="770" y="1075" width="250" height="60" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="780" y="1095" font-size="11" font-weight="bold">LED Test Battery</text>
+  <text x="780" y="1112" font-size="9">• 3V CR2032 coin cell</text>
+  <text x="780" y="1127" font-size="9">• Test RGB LED directly</text>
+  
+  <!-- Tool 4 -->
+  <rect x="1050" y="1075" width="250" height="60" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="1060" y="1095" font-size="11" font-weight="bold">Oscilloscope (Optional)</text>
+  <text x="1060" y="1112" font-size="9">• Verify PWM signals</text>
+  <text x="1060" y="1127" font-size="9">• Check PM2.5 LED pulse</text>
+  
+  <!-- Measurement Reference -->
+  <rect x="770" y="1150" width="530" height="110" fill="#fffacd" stroke="#cc9900" stroke-width="2" rx="3"/>
+  <text x="1035" y="1175" font-size="13" font-weight="bold" text-anchor="middle">NORMAL VOLTAGE MEASUREMENTS</text>
+  <g font-size="10">
+    <text x="780" y="1195">• Main +5V rail: 4.8-5.2V</text>
+    <text x="780" y="1212">• ESP32 3.3V pin: 3.2-3.4V</text>
+    <text x="780" y="1229">• ULN2803A COM (Pin 10): 5.0V</text>
+    <text x="780" y="1246">• ULN2803A outputs: 0-5V (PWM dependent)</text>
+    
+    <text x="1050" y="1195">• PCA9685 VCC: 4.8-5.2V</text>
+    <text x="1050" y="1212">• PCA9685 outputs: 0-3.3V PWM</text>
+    <text x="1050" y="1229">• PM2.5 sensor: 3.3V (NOT 5V!)</text>
+    <text x="1050" y="1246">• MQ-135 sensor: 5.0V</text>
+  

@@ -1,0 +1,19 @@
+Build a document that contains the following on this project, imagining a real life scenario where this project would be deployed in a real home.  Forget the simulator for now:
+
+What i need in this document:
+* Executive summary (around 1 A4 page)
+* Elevator pitch 
+* Catch phrases (multiple)
+* Sales material including all the features of this project important for a family trying to survive in a high pollution environment
+* User requirements
+* System Design criterion - main points
+* Architectural diagram
+* Main nodes - Functional components physically
+* Deployment Architecture
+* Logical Architecture
+* Layers of the application
+* Main pollutants being tracked and their sensors. 
+* Sensors and main controllers, devices being operated
+* Entire Decision tree on nodes being operated based on house internal or external pollution condition.
+
+Break it into 2-3 responses based on your context length
